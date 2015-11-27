@@ -20,20 +20,25 @@ public class Agatha extends Thread {
 		while(true) {
 			try {
 				select.acquire();
-			} catch (InterruptedException e) {}
+			} catch (InterruptedException e) {
+				System.err.println("Could not acquire select process");
+			}
 			int item = ran.nextInt(3) + 1;
 			switch(item){
 			case 1:
 				tobacco.release();
 				paper.release();
+				System.out.println("Agatha put tobacco and paper on the table");
 				break;
 			case 2:
 				tobacco.release();
 				spark.release();
+				System.out.println("Agatha put tobacco and spark on the table");
 				break;
 			case 3:
 				paper.release();
 				spark.release();
+				System.out.println("Agatha put paper and spark on the table");
 				break;
 			default:
 				break;
