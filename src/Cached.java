@@ -2,15 +2,14 @@ import java.util.concurrent.Semaphore;
 
 public class Cached extends Thread {
 	Semaphore resource;
-	Semaphore[] semaArray = new Semaphore[6];
+	Semaphore[] semaArray;
 	Semaphore mutex;
 	int resourceId;
-	int counter;
+	static int counter = 0;
 
-	public Cached(int resourceId, Semaphore resource, int counter, Semaphore[] semaArray) {
+	public Cached(int resourceId, Semaphore resource, Semaphore[] semaArray) {
 		this.resourceId = resourceId;
 		this.resource = resource;
-		this.counter = counter;
 		this.semaArray = semaArray;
 		this.mutex = new Semaphore(1);
 	}
