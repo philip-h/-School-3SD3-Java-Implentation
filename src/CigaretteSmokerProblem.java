@@ -18,14 +18,12 @@ class CigaretteSmokerProblem {
 		Cached cached_tobacco = new Cached(1, tobacco, semaArray);
 		Cached cached_paper = new Cached(2, paper, semaArray);
 		Cached cached_spark = new Cached(4, spark, semaArray);
+		/* Serves to pass over the counter variable as it is static in Cached*/
+		Cached cached_resource = new Cached(0, null, null);
 		
-		cached_tobacco.incr();
-		cached_paper.incr();
-		cached_spark.incr();
-		
-//		Smokers horacio = new Smokers(select, cached_resource, 6, "Horacio");
-//		Smokers arthur = new Smokers(select, cached_resource, 5, "Arthur");
-//		Smokers edgar = new Smokers(select, cached_resource, 3, "Edgar");
+		Smokers horacio = new Smokers(select, cached_resource, semaArray, 6, "Horacio");
+		Smokers arthur = new Smokers(select, cached_resource, semaArray, 5, "Arthur");
+		Smokers edgar = new Smokers(select, cached_resource, semaArray, 3, "Edgar");
 	}
 	
 }
