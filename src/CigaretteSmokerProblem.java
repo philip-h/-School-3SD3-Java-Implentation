@@ -1,39 +1,21 @@
 import java.util.concurrent.Semaphore;
 
 class CigaretteSmokerProblem {
-	protected char[] buf;
-	protected int in = 0;
-	protected int out = 0;
-	protected int count = 0;
-	protected int size;
-
-	Semaphore full; // counts number of items
-	Semaphore empty;// counts number of spaces
-
-	CigaretteSmokerProblem(int size) {
-		this.size = size;
-		buf = new char[size];
-		full = new Semaphore(0);
-		empty = new Semaphore(size);
+	
+	public static void main(String[] args) {
+		int counter;
+		Semaphore select = new Semaphore(1);
+		Semaphore tobacco = new Semaphore(0);
+		Semaphore paper = new Semaphore(0);
+		Semaphore spark = new Semaphore(0);
+		Agatha agatha = new Agatha(select, tobacco, paper, spark);
+		Cached cached_tobacco = new Cached(1, tobacco);
+		Cached cached_paper = new Cached(2, paper);
+		Cached cached_spark = new Cached(4, spark);
+		Smokers horacio = new Smokers(select, cached_resource, 6, "Horacio");
+		Smokers arthur = new Smokers(select, cached_resource, 5, "Arthur");
+		Smokers edgar = new Smokers(select, cached_resource, 3, "Edgar");
+		
 	}
-
-	synchronized public void put(char o) throws InterruptedException {
-		empty.acquire();
-		synchronized(this) { //deadlock was here, protect!
-			buf[in] = o;
-			++count;
-			in = (in + 1) % size;
-		}
-		full.release();
-	}
-
-	synchronized public char get() throws InterruptedException {
-		full.acquire();
-		char o = buf[out];
-		buf[out] = 0;
-		--count;
-		out = (out + 1) % size;
-		empty.release();
-		return (o);
-	}
+	
 }
