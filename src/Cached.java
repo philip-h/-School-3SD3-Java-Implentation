@@ -5,22 +5,19 @@ public class Cached extends Thread {
 	Semaphore[] semaArray = new Semaphore[6];
 	Semaphore mutex;
 	int resourceId;
-	
 	int counter;
 
-	public Cached(int resourceId, Semaphore resource) {
+	public Cached(int resourceId, Semaphore resource, int counter, Semaphore[] semaArray) {
 		this.resourceId = resourceId;
 		this.resource = resource;
+		this.counter = counter;
+		this.semaArray = semaArray;
 		this.mutex = new Semaphore(1);
-		//Initialize our 6 semaphores to 0 in our semaphore array
-		for (int i=0; i<6; i++){
-			semaArray[i] = new Semaphore(0);
-		}
 	}
 	
 	public void reset(){
 		this.counter = 0;
-	};
+	}
 	
 	public Semaphore[] getSemaArray(){
 		return this.semaArray;

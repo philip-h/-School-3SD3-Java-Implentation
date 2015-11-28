@@ -17,7 +17,7 @@ public class Smokers extends Thread {
 	public void run() {
 		while(true){
 			try {
-				cached_resource.getSemaArray[resource_index-1].acquire();
+				cached_resource.getSemaArray()[resource_index-1].acquire();
 			} catch (InterruptedException e) {
 				System.out.println(name + "Could not acquire resource number " + resource_index);
 			}
