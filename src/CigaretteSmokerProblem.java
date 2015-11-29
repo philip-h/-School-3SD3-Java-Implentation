@@ -1,6 +1,6 @@
 import java.util.concurrent.Semaphore;
 
-class CigaretteSmokerProblem extends Thread{
+class CigaretteSmokerProblem {
 	
 	public static void main(String[] args) {
 		Semaphore[] semaArray = new Semaphore[6];
@@ -19,6 +19,7 @@ class CigaretteSmokerProblem extends Thread{
 		Cached cached_tobacco = new Cached(1, tobacco, semaArray);
 		Cached cached_paper = new Cached(2, paper, semaArray);
 		Cached cached_spark = new Cached(4, spark, semaArray);
+		
 		/* Serves to pass over the counter variable as it is static in Cached*/
 		Cached cached_resource = new Cached(0, null, null);
 		
@@ -34,20 +35,12 @@ class CigaretteSmokerProblem extends Thread{
 		cached_tobacco.start();
 		cached_paper.start();
 		cached_spark.start();
-		
+		//cached_resource.start();
 		// Begin the smokers processes
 		horacio.start();
 		arthur.start();
 		edgar.start();
 		
-//		try {
-//			horacio.join();
-//			arthur.join();
-//			edgar.join();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 	}
 	

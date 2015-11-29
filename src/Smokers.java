@@ -21,11 +21,14 @@ public class Smokers extends Thread {
 			try {
 				semaArray[resource_index-1].acquire();
 				cached_resource.reset();
-				System.out.println(name + " is smoking the cigaret");
-				System.out.println(name + " has stubbed out his cigaret");
 				
+			//	System.out.println(name + " is smoking the cigaret");
+				System.out.println(name + " has stubbed out his cigaret");
+				Thread.sleep(2000);
 				select.release();
+				
 			} catch (InterruptedException e) {
+				
 				System.out.println(name + "Could not acquire resource number " + resource_index);
 			}
 			

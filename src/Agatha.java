@@ -22,10 +22,11 @@ public class Agatha extends Thread {
 	@Override
 	public void run() {
 		while(true) {
-			System.out.println("a");
+
 			try {
 				select.acquire();
-				System.out.println("tried");
+				Thread.sleep(1000);
+
 			} catch (InterruptedException e) {
 				System.err.println("Could not acquire select process");
 			}
