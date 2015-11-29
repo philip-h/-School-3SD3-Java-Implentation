@@ -1,6 +1,6 @@
 import java.util.concurrent.Semaphore;
 
-class CigaretteSmokerProblem {
+class CigaretteSmokerProblem extends Thread{
 	
 	public static void main(String[] args) {
 		Semaphore[] semaArray = new Semaphore[6];
@@ -14,6 +14,7 @@ class CigaretteSmokerProblem {
 		Semaphore tobacco = new Semaphore(0);
 		Semaphore paper = new Semaphore(0);
 		Semaphore spark = new Semaphore(0);
+		
 		Agatha agatha = new Agatha(select, tobacco, paper, spark);
 		Cached cached_tobacco = new Cached(1, tobacco, semaArray);
 		Cached cached_paper = new Cached(2, paper, semaArray);
@@ -24,6 +25,30 @@ class CigaretteSmokerProblem {
 		Smokers horacio = new Smokers(select, cached_resource, semaArray, 6, "Horacio");
 		Smokers arthur = new Smokers(select, cached_resource, semaArray, 5, "Arthur");
 		Smokers edgar = new Smokers(select, cached_resource, semaArray, 3, "Edgar");
+		
+		
+		// Start the agent
+		agatha.start();
+		
+		// Begin the cached object processes
+		cached_tobacco.start();
+		cached_paper.start();
+		cached_spark.start();
+		
+		// Begin the smokers processes
+		horacio.start();
+		arthur.start();
+		edgar.start();
+		
+//		try {
+//			horacio.join();
+//			arthur.join();
+//			edgar.join();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 	}
 	
 }

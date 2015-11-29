@@ -18,8 +18,10 @@ public class Agatha extends Thread {
 	@Override
 	public void run() {
 		while(true) {
+			System.out.println("a");
 			try {
 				select.acquire();
+				System.out.println("tried");
 			} catch (InterruptedException e) {
 				System.err.println("Could not acquire select process");
 			}
@@ -45,9 +47,5 @@ public class Agatha extends Thread {
 			}
 		}
 	}
-	
-	
-	
-	
 
 }

@@ -23,6 +23,7 @@ public class Smokers extends Thread {
 				cached_resource.reset();
 				System.out.println(name + " is smoking the cigaret");
 				System.out.println(name + " has stubbed out his cigaret");
+				
 				select.release();
 			} catch (InterruptedException e) {
 				System.out.println(name + "Could not acquire resource number " + resource_index);
