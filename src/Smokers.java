@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
 public class Smokers extends Thread {
@@ -6,6 +7,7 @@ public class Smokers extends Thread {
 	private Semaphore [] semaArray;
 	private int resource_index;
 	private String name;
+	Scanner input;
 
 	public Smokers(Semaphore select, Cached cached_resource, Semaphore[] semaArray, int resource_index, String name) {
 		this.select = select;
@@ -13,6 +15,7 @@ public class Smokers extends Thread {
 		this.semaArray = semaArray;
 		this.resource_index = resource_index;
 		this.name = name;
+		this.input = new Scanner(System.in);
 	}
 
 	@Override
@@ -24,7 +27,11 @@ public class Smokers extends Thread {
 				cached_resource.reset();
 				System.out.println(name + " is smoking the cigarette");
 				System.out.println(name + " has stubbed out his cigarette");
+				
 				/* Release select */
+				System.out.println("\nPress enter to release the next select\n");
+				input.nextLine();
+				
 				select.release();
 			}
 		}
