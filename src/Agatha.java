@@ -25,7 +25,7 @@ public class Agatha extends Thread {
 
 			try {
 				select.acquire();
-				Thread.sleep(1000);
+				 //Thread.sleep(1000);
 
 			} catch (InterruptedException e) {
 				System.err.println("Could not acquire select process");

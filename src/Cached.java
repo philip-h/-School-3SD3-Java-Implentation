@@ -3,7 +3,7 @@ import java.util.concurrent.Semaphore;
 public class Cached extends Thread {
 	Semaphore resource;
 	Semaphore[] semaArray;
-	Semaphore mutex;
+	static Semaphore mutex;
 	int resourceId;
 	static int counter = 0;
 
@@ -11,7 +11,7 @@ public class Cached extends Thread {
 		this.resourceId = resourceId;
 		this.resource = resource;
 		this.semaArray = semaArray;
-		this.mutex = new Semaphore(1);
+		Cached.mutex = new Semaphore(1);
 	}
 
 	public void reset() {
@@ -35,11 +35,11 @@ public class Cached extends Thread {
 				Cached.counter += this.resourceId;
 
 				/* release our resource semaphores */
-				semaArray[counter-1].release();
-				 /* up on mutex */
+				semaArray[Cached.counter-1].release();
+				
+				/* up on mutex */
 				mutex.release();
 				
-				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println("Could not acquire resource or mutex semaphore");
 			}

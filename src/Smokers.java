@@ -18,22 +18,15 @@ public class Smokers extends Thread {
 	@Override
 	public void run() {
 		while(true){
-			try {
-				/* Try to acquire specific index of array */
-				if(semaArray[resource_index-1].tryAcquire()) {
-					/* If acquired, smoke and stub*/
-					cached_resource.reset();
-					System.out.println(name + " is smoking the cigarette");
-					System.out.println(name + " has stubbed out his cigarette");
-					Thread.sleep(2000);
-					/* Release select */
-					select.release();
-				}
-				
-			} catch (InterruptedException e) {
-				System.out.println(name + "Could not acquire resource number " + resource_index);
+			/* Try to acquire specific index of array */
+			if(semaArray[resource_index-1].tryAcquire()) {
+				/* If acquired, smoke and stub*/
+				cached_resource.reset();
+				System.out.println(name + " is smoking the cigarette");
+				System.out.println(name + " has stubbed out his cigarette");
+				/* Release select */
+				select.release();
 			}
-			
 		}
 	}	
 }
