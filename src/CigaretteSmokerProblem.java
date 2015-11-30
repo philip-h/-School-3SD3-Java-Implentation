@@ -4,12 +4,11 @@ class CigaretteSmokerProblem {
 	
 	public static void main(String[] args) {
 		Semaphore[] semaArray = new Semaphore[6];
-		//Initialize our resource 6 semaphores to 0 in our semaphore array
+		/*Initialize our resource 6 semaphores to 0 in our semaphore array*/
 		for (int i=0; i<6; i++){
 			semaArray[i] = new Semaphore(0);
 		}
 		
-		int counter;
 		Semaphore select = new Semaphore(1);
 		Semaphore tobacco = new Semaphore(0);
 		Semaphore paper = new Semaphore(0);
@@ -28,15 +27,15 @@ class CigaretteSmokerProblem {
 		Smokers edgar = new Smokers(select, cached_resource, semaArray, 3, "Edgar");
 		
 		
-		// Start the agent
+		/* Start the agent */
 		agatha.start();
 		
-		// Begin the cached object processes
+		/* Begin the cached object processes */
 		cached_tobacco.start();
 		cached_paper.start();
 		cached_spark.start();
-		//cached_resource.start();
-		// Begin the smokers processes
+		
+		/* Begin the smokers processes */
 		horacio.start();
 		arthur.start();
 		edgar.start();

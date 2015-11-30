@@ -31,9 +31,9 @@ public class Agatha extends Thread {
 				System.err.println("Could not acquire select process");
 			}
 			
-			// Generate a random number to see which two items should be released
+			/* Generate a random number to see which two items should be released */
 			int item = ran.nextInt(3) + 1;
-			// Release the items
+			/* Release the items */
 			switch(item){
 			case 1:
 				tobacco.release();

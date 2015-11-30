@@ -19,21 +19,21 @@ public class Smokers extends Thread {
 	public void run() {
 		while(true){
 			try {
-				semaArray[resource_index-1].acquire();
-				cached_resource.reset();
-				
-			//	System.out.println(name + " is smoking the cigaret");
-				System.out.println(name + " has stubbed out his cigaret");
-				Thread.sleep(2000);
-				select.release();
+				/* Try to acquire specific index of array */
+				if(semaArray[resource_index-1].tryAcquire()) {
+					/* If acquired, smoke and stub*/
+					cached_resource.reset();
+					System.out.println(name + " is smoking the cigarette");
+					System.out.println(name + " has stubbed out his cigarette");
+					Thread.sleep(2000);
+					/* Release select */
+					select.release();
+				}
 				
 			} catch (InterruptedException e) {
-				
 				System.out.println(name + "Could not acquire resource number " + resource_index);
 			}
 			
 		}
-	}
-	
-	
+	}	
 }

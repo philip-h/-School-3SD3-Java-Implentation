@@ -15,7 +15,7 @@ public class Cached extends Thread {
 	}
 
 	public void reset() {
-		this.counter = 0;
+		Cached.counter = 0;
 	}
 
 	public Semaphore[] getSemaArray() {
@@ -25,31 +25,23 @@ public class Cached extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				// down on resource
+				/* down on resource */
 				this.resource.acquire();
 
-				// down on mutex
+				/* down on mutex */
 				this.mutex.acquire();
 
-				// modify counter depending on resource
-				System.out.println("Add to the counter");
-				this.counter += this.resourceId;
+				/* modify counter depending on resource */
+				Cached.counter += this.resourceId;
 
-				// release our resource semaphores
-				System.out.println("Releasing resource semaphore");
+				/* release our resource semaphores */
+				semaArray[counter-1].release();
+				 /* up on mutex */
+				mutex.release();
 				
-				// Is this right???
-				// THe TAs notes say to "increment the proper semaphore in the array"
-				for (int i = 0; i < 6; i++) {
-
-					semaArray[i].release();
-				}
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				mutex.release();
+				System.out.println("Could not acquire resource or mutex semaphore");
 			}
 		}
 	}
