@@ -37,9 +37,9 @@ public class Cached extends Thread {
 				/* release our resource semaphores */
 				semaArray[counter-1].release();
 				 /* up on mutex */
-				mutex.release();
+				this.mutex.release();
 				
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println("Could not acquire resource or mutex semaphore");
 			}

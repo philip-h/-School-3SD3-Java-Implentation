@@ -25,12 +25,12 @@ public class Smokers extends Thread {
 					cached_resource.reset();
 					System.out.println(name + " is smoking the cigarette");
 					System.out.println(name + " has stubbed out his cigarette");
-					Thread.sleep(2000);
+					//Thread.sleep(1000);
 					/* Release select */
 					select.release();
 				}
 				
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				System.out.println(name + "Could not acquire resource number " + resource_index);
 			}
 			

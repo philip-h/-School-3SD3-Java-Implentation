@@ -22,9 +22,10 @@ class CigaretteSmokerProblem {
 		/* Serves to pass over the counter variable as it is static in Cached*/
 		Cached cached_resource = new Cached(0, null, null);
 		
-		Smokers horacio = new Smokers(select, cached_resource, semaArray, 6, "Horacio");
-		Smokers arthur = new Smokers(select, cached_resource, semaArray, 5, "Arthur");
 		Smokers edgar = new Smokers(select, cached_resource, semaArray, 3, "Edgar");
+		Smokers arthur = new Smokers(select, cached_resource, semaArray, 5, "Arthur");
+		Smokers horacio = new Smokers(select, cached_resource, semaArray, 6, "Horacio");
+
 		
 		
 		/* Start the agent */
